@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Builder
 
 @Entity
-@Table(schema = "inventory_system", name = "product")
-public class Product {
+@Table(schema = "inventory_system", name = "inventory")
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +41,5 @@ public class Product {
     @Column(name = "insert_product_date")
     @Timestamp
     private LocalDate insertProductToInventory;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Users users;
 
 }
