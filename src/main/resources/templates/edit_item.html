@@ -21,32 +21,38 @@
 
                     <div class="form-group">
                         <label>Тип</label>
-                        <input type="text" name="lastName" th:field="*{productType}" class="form-control"/>
+                        <input type="text" name="type" th:field="*{productType}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <label>Вес</label>
-                        <input type="text" name="email" th:field="*{productWeight}" class="form-control"/>
+                        <input type="text" name="weight" th:field="*{productWeight}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
-                        <label>Упаковка</label>
-                        <input type="text" name="email" th:field="*{productPackage}" class="form-control"/>
+                        <label for="package">Упаковка</label>
+                        <select class="form-control middle-input" id="package" name="package">
+                            <option value="true" th:selected="*{productPackage}">Да</option>
+                            <option value="false" th:selected="*{productPackage}">Нет</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Хрупкость</label>
-                        <input type="text" name="email" th:field="*{fragile}" class="form-control"/>
+                        <label for="fragile">Хрупкость</label>
+                        <select class="form-control middle-input" id="fragile" name="fragile">
+                            <option value="true" th:selected="*{fragile}">Да</option>
+                            <option value="false" th:selected="*{fragile}">Нет</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Дата добавления</label>
-                        <input type="text" name="email" th:field="*{insertProductToInventory}" class="form-control"/>
+                        <input type="date" name="insertDate" th:field="*{insertProductToInventory}" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <label>Стоиомсть USD</label>
-                        <input type="text" name="email" th:field="*{priceUsd}" class="form-control"/>
+                        <input type="text" name="priceUsd" th:field="*{priceUsd}" class="form-control"/>
                     </div>
 
                     <div class="box-footer">

@@ -3,8 +3,11 @@ package com.fruitella.inventory.entity;
 import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -39,7 +42,6 @@ public class Inventory {
     private Double priceUsd;
 
     @Column(name = "insert_product_date")
-    @Timestamp
-    private LocalDate insertProductToInventory;
-
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String insertProductToInventory;
 }

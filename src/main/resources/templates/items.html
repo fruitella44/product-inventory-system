@@ -37,8 +37,14 @@
       <td th:text="${item.productName}"></td>
       <td th:text="${item.productType}"></td>
       <td th:text="${item.productWeight}"></td>
-      <td th:text="${item.productPackage}"></td>
-      <td th:text="${item.fragile}"></td>
+      <td>
+        <span th:if="${item.insertProductToInventory}">Да</span>
+        <span th:unless="${item.insertProductToInventory}">Нет</span>
+      </td>
+      <td>
+        <span th:if="${item.fragile}">Да</span>
+        <span th:unless="${item.fragile}">Нет</span>
+      </td>
       <td th:text="${item.insertProductToInventory}"></td>
       <td th:text="${item.priceUsd}"></td>
       <td>
