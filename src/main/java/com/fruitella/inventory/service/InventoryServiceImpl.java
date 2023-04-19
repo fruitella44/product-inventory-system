@@ -17,7 +17,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<Inventory> getAll() {
+    public List<Inventory> getAllItems() {
         return inventoryRepository.findAll();
     }
 

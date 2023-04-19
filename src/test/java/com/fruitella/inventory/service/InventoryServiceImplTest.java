@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ class InventoryServiceImplTest {
 
     @Test
     public void testGetAllItemsFromInventory() {
-        List<String> productNames = inventoryService.getAll().stream()
+        List<String> productNames = inventoryService.getAllItems().stream()
                 .map(Inventory :: getProductName)
                 .collect(Collectors.toList());
         assertThat(productNames, hasItems("Playstation 4", "Iphone X", "Samsung Ultra Sharp", "D-Link DES-1008D"));

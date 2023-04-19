@@ -5,7 +5,7 @@ import com.fruitella.inventory.entity.Inventory;
 import java.util.List;
 
 public interface InventoryService {
-    List<Inventory> getAll();
+    List<Inventory> getAllItems();
     Inventory addNewItem(Inventory inventory);
     Inventory findItemById(Long itemId);
     Inventory updateExistedItem(Inventory inventory);

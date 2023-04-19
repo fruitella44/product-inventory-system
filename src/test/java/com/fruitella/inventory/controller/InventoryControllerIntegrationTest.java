@@ -32,7 +32,7 @@ class InventoryControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("items"))
                 .andExpect(model().attributeExists("items"))
-                .andExpect(model().attribute("items", inventoryService.getAll()));
+                .andExpect(model().attribute("items", inventoryService.getAllItems()));
     }
 
 

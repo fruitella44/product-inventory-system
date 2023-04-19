@@ -20,8 +20,8 @@ public class InventoryController {
     }
 
     @GetMapping("/items")
-    public String listItemsInventory(Model model) {
-        model.addAttribute("items", inventoryService.getAll());
+    public String listOfItemsInventory(Model model) {
+        model.addAttribute("items", inventoryService.getAllItems());
         return "items";
     }
 
