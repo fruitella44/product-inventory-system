@@ -2,6 +2,7 @@ package com.fruitella.inventory.controller;
 
 import com.fruitella.inventory.entity.Inventory;
 import com.fruitella.inventory.service.InventoryService;;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,29 @@ public class InventoryRestController {
     }
 
     @GetMapping("/items")
-    public List<Inventory> getAllInventoryItems() {
-        return inventoryService.getAllItems();
+    public ResponseEntity<List<Inventory>> getAllInventoryItems() {
+        return ResponseEntity.ok().body(inventoryService.getAllItems());
+    }
+
+
+    @GetMapping("/items/{itemId}")
+    public ResponseEntity<Inventory> getInventoryItemById(@PathVariable Long itemId) {
+        return ResponseEntity.ok().body(inventoryService.findItemById(itemId));
     }
 
     @GetMapping("/items/new")
-    public Inventory addNewInventoryItem(Inventory inventory) {
-        return inventoryService.addNewItem(inventory);
+    public ResponseEntity<Inventory> addNewInventoryItem(Inventory inventory) {
+        return ResponseEntity.ok().body(inventoryService.addNewItem(inventory));
+    }
+
+    @GetMapping("/items/edit/{itemId}")
+    public ResponseEntity<Inventory> updateExistedInventoryItemById(@PathVariable Long itemId) {
+        Inventory inventory = inventoryService.findItemById(itemId);
+        return ResponseEntity.ok().body(inventoryService.updateExistedItem(inventory));
+    }
+
+    @GetMapping("/items/delete/{itemId}")
+    public void deleteExistedInventoryItemById(@PathVariable Long itemId) {
+         inventoryService.deleteExistedItemById(itemId);
     }
 }
