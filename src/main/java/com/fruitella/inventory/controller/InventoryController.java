@@ -29,7 +29,7 @@ public class InventoryController {
                                               @RequestParam(defaultValue = "0") int page,
                                               @RequestParam(defaultValue = "10") int size) {
         Page<Inventory> inventoryPages = inventoryService.getListOfItemsPerPage(PageRequest.of(page, size));
-        model.addAttribute("items", inventoryPages);
+        model.addAttribute("page", inventoryPages);
         return "items";
     }
 

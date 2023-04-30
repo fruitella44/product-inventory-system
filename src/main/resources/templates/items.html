@@ -58,8 +58,8 @@
   <div class="pagination">
     <ul>
       <!-- previous page button -->
-      <li th:class="${page.hasPreviousPage()} ? '' : 'disabled'">
-        <a th:href="@{${page.previousPageLink()}}" aria-label="Previous">
+      <li th:class="${page.hasPrevious()} ? '' : 'disabled'">
+        <a th:href="@{${page.previousOrFirstPageable()}}" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
