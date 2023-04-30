@@ -2,9 +2,12 @@ package com.fruitella.inventory.service;
 
 import com.fruitella.inventory.entity.Inventory;
 import com.fruitella.inventory.repository.InventoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
@@ -19,6 +22,11 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public List<Inventory> getAllItems() {
         return inventoryRepository.findAll();
+    }
+
+    @Override
+    public Page<Inventory> getListOfItemsPerPage(Pageable pageable) {
+        return inventoryRepository.listOfItemsPerPage(pageable);
     }
 
     @Override
