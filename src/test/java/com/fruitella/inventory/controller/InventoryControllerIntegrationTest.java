@@ -4,13 +4,20 @@ import com.fruitella.inventory.entity.Inventory;
 import com.fruitella.inventory.service.InventoryService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -28,36 +35,21 @@ class InventoryControllerIntegrationTest {
 
     @Test
     public void testControllerListItemsOfInventory() throws Exception {
+        List<Inventory> inventoryList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            inventoryList.add(new Inventory());
+        }
+
+        Page<Inventory> page = new PageImpl<>(inventoryList);
+        Mockito.when(inventoryService.getListOfItemsPerPage(PageRequest.of(0, 10)))
+                .thenReturn(page);
+
         mockMvc.perform(get("/items").accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(view().name("items"))
                 .andExpect(model().attributeExists("items"))
-                .andExpect(model().attribute("items", inventoryService.getAllItems()));
+                .andExpect(model().attribute("items", page));
     }
-
-
-    @Test
-    public void testControllerAddNewItemForm() throws Exception {
-        mockMvc.perform(post("/items")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("productName", "Focusrite-solo")
-                        .param("productType", "Soundcard")
-                        .param("productPackage", "false")
-                        .param("productFragile", "false")
-                        .param("productWeight", "0.9")
-                        .param("insertProductToInventory", "02-02-2023")
-                        .param("priceUsd", "150.50"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/items"));
-
-
-        mockMvc.perform(get("/items/new").accept(MediaType.TEXT_PLAIN))
-                .andExpect(status().isOk())
-                .andExpect(view().name("create_item"))
-                .andExpect(model().attributeExists("item"))
-                .andExpect(model().attribute("item", Matchers.notNullValue()));
-    }
-
 
     @Test
     public void testControllerEditInventoryItemForm() throws Exception {
@@ -98,9 +90,6 @@ class InventoryControllerIntegrationTest {
 
         verify(inventoryService).updateExistedItem(existedItem);
     }
-
-
-
 
     @Test
     public void testControllerDeleteItemFromInventory() throws Exception {

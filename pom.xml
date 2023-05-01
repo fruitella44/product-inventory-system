@@ -20,6 +20,7 @@
         <java.version>17</java.version>
         <jbcrypt.version>0.4</jbcrypt.version>
         <jasypt.version>3.0.3</jasypt.version>
+        <logging.version>2.20.0</logging.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,12 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${logging.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -107,7 +114,7 @@
             <plugin>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>${jasypt.version}</version>
             </plugin>
 
             <plugin>
@@ -129,6 +136,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

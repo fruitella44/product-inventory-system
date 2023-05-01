@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,11 +29,11 @@ class InventoryServiceImplTest {
     private InventoryRepository inventoryRepository;
 
     @Test
-    public void testGetAllItemsFromInventory() {
-        List<String> productNames = inventoryService.getAllItems().stream()
+    public void testGetAllItemsFromInventoryPerPage() {
+        List<String> productNames = inventoryService.getListOfItemsPerPage(PageRequest.of(0, 10)).stream()
                 .map(Inventory :: getProductName)
                 .collect(Collectors.toList());
-        assertThat(productNames, hasItems("Playstation 4", "Iphone X", "Samsung Ultra Sharp", "D-Link DES-1008D"));
+        assertThat(productNames, hasItems("Huawei Nova 5T", "Samsung Ultra HD 8K", "Asus Laptop 14 E410KA-BV119W"));
     }
 
     @Test

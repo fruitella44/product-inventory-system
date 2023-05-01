@@ -1,16 +1,20 @@
 package com.fruitella.inventory.controller;
 
 import com.fruitella.inventory.entity.Inventory;
-import com.fruitella.inventory.service.InventoryService;;
+import com.fruitella.inventory.service.InventoryService;
+import lombok.extern.log4j.Log4j2;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
+@Log4j2
 public class InventoryRestController {
-
     private final InventoryService inventoryService;
 
     public InventoryRestController(InventoryService inventoryService) {
@@ -19,29 +23,34 @@ public class InventoryRestController {
     }
 
     @GetMapping("/items")
-    public ResponseEntity<List<Inventory>> getAllInventoryItems() {
-        return ResponseEntity.ok().body(inventoryService.getAllItems());
+    public ResponseEntity<Page<Inventory>> getAllInventoryItems() {
+        log.debug("Return presentation level with json. Content[AllItems]");
+        return ResponseEntity.ok().body(inventoryService.getListOfItemsPerPage(PageRequest.of(0, 10)));
     }
 
 
     @GetMapping("/items/{itemId}")
     public ResponseEntity<Inventory> getInventoryItemById(@PathVariable Long itemId) {
+        log.debug("Return presentation level with json. Content[getItem with id: " + itemId + "]");
         return ResponseEntity.ok().body(inventoryService.findItemById(itemId));
     }
 
-    @GetMapping("/items/new")
+    @PostMapping("/items/new")
     public ResponseEntity<Inventory> addNewInventoryItem(Inventory inventory) {
+        log.debug("Return presentation level with json. Content[create new]");
         return ResponseEntity.ok().body(inventoryService.addNewItem(inventory));
     }
 
-    @GetMapping("/items/edit/{itemId}")
+    @PostMapping("/items/edit/{itemId}")
     public ResponseEntity<Inventory> updateExistedInventoryItemById(@PathVariable Long itemId) {
         Inventory inventory = inventoryService.findItemById(itemId);
+        log.debug("Return presentation level with json. Content[findItemById, current id: + " + itemId + "]");
         return ResponseEntity.ok().body(inventoryService.updateExistedItem(inventory));
     }
 
-    @GetMapping("/items/delete/{itemId}")
+    @PostMapping("/items/delete/{itemId}")
     public void deleteExistedInventoryItemById(@PathVariable Long itemId) {
+        log.debug("Return presentation level with json. Content[deleteItemById, current id: + " + itemId + "]");
          inventoryService.deleteExistedItemById(itemId);
     }
 }
