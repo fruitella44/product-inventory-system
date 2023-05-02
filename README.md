@@ -19,5 +19,5 @@
 * ![jacoco](https://i.imgur.com/XHUs64V.png)
 ------------------------------------
 * Для создания и сборки проекта использовались следующие технологии:
-  JDK-17, Maven, Spring-boot, Hibernate-5, PostgreSQL-13, Log4j2, Bootstrap-5, Thymeleaf, Lombok, Jasypt, JUnit5, Jacoco
+  JDK-17, Maven, Spring-boot, Hibernate-5, PostgreSQL-13, Log4j2, Bootstrap-5, Thymeleaf, Lombok, Jasypt, JUnit5, MockMvc, Jacoco
 ------------------------------------
